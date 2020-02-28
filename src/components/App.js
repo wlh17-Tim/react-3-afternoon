@@ -5,6 +5,7 @@ import './App.css';
 
 import Header from './Header/Header';
 import Compose from './Compose/Compose';
+import Post from './Post/Post';
 
 class App extends Component {
   constructor() {
@@ -56,7 +57,7 @@ class App extends Component {
 
           {
             posts.map(post => (
-              <post key ={post.id}
+              <Post key ={post.id}
                     text={post.text}
                     date={post.date}
                     id={post.id}
