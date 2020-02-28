@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 
 import './App.css';
 
@@ -19,11 +20,15 @@ class App extends Component {
   }
   
   componentDidMount() {
-
+    axios.get('https://practiceapi.devmountain.com/api/posts').then(results => {
+      this.setState({posts: results.data})
+    })
   }
 
-  updatePost() {
-  
+  updatePost(id, text) {
+    axios.put(`https://practiceapi.devmountain.com/api/posts?id=${ id }`, {text}).then(results => {
+      this.setState({posts: results.data})
+    });
   }
 
   deletePost() {
@@ -44,6 +49,17 @@ class App extends Component {
         <section className="App__content">
 
           <Compose />
+
+          {
+            posts.map(post => (
+              <post key ={post.id}
+                    text={post.text}
+                    date={post.date}
+                    id={post.id}
+                    updatePostFn={this.updatePost}
+              />
+            ))
+          }
           
         </section>
       </div>
